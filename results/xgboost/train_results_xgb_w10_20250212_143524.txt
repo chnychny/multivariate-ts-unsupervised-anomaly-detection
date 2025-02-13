@@ -1,0 +1,13 @@
+Training Configuration:
+window_size: 10
+window_given: 9
+n_models: 3
+learning_rate: 0.001
+max_depth: 6
+n_estimators: 100
+subsample: 0.9
+colsample_bytree: 0.9
+use_gpu: False
+gpu_id: 0
+
+Training Loss: 0.091170

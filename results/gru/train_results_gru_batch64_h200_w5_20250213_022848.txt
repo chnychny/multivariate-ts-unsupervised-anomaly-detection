@@ -1,0 +1,14 @@
+Training Configuration:
+window_size: 5
+window_given: 4
+batch_size: 64
+n_epochs: 300
+learning_rate: 0.001
+dropout: 0.2
+threshold: 0.1
+n_hiddens: 200
+n_layers: 3
+bidirectional: False
+
+Best Epoch: 94
+Best Loss: 0.000209

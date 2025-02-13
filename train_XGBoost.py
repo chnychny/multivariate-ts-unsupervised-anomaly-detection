@@ -31,9 +31,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description='HAI XGBoost 모델 학습')
     
     # 모델 파라미터
-    parser.add_argument('--window-size', type=int, default=10,
+    parser.add_argument('--window-size', type=int, default=40,
                         help='윈도우 크기 (기본값: 50)')
-    parser.add_argument('--window-given', type=int, default=9,
+    parser.add_argument('--window-given', type=int, default=39,
                         help='입력으로 사용할 윈도우 크기 (기본값: 49)')
     
     # XGBoost 파라미터
@@ -145,7 +145,7 @@ def main():
     model, train_loss = train(train_processed, model_config)
     
     # 모델 저장
-    model_path = model_dir / f"xgb_model_w10_{timestamp}.joblib"
+    model_path = model_dir / f"xgb_model_w{model_config.window_size}_{timestamp}.joblib"
     joblib.dump({
         "model": model,
         "config": model_config.__dict__,
@@ -153,7 +153,7 @@ def main():
     }, model_path)
     
     # 학습 결과 저장
-    with open(result_dir / f"train_results_xgb_w10_{timestamp}.txt", 'w') as f:
+    with open(result_dir / f"train_results_xgb_w{model_config.window_size}_{timestamp}.txt", 'w') as f:
         f.write(f"Training Configuration:\n")
         for key, value in model_config.__dict__.items():
             f.write(f"{key}: {value}\n")
@@ -221,14 +221,14 @@ def test(model_path="xgb_model.joblib"):
         'predicted_label': padded_labels,
         'ground_truth': attack_labels
     })
-    results_df.to_csv(result_dir / f"detailed_results_w10_{timestamp}.csv", index=False)
+    results_df.to_csv(result_dir / f"detailed_results_w{model_config.window_size}_{timestamp}.csv", index=False)
     
     # 결과 출력 및 저장
     print("\nTest Results:")
     print(f"F1: {tapr['f1']:.3f} (TaP: {tapr['TaP']:.3f}, TaR: {tapr['TaR']:.3f})")
     print(f"Number of detected anomalies: {len(tapr['Detected_Anomalies'])}")
     
-    result_file = result_dir / f"test_results_xgb_w10_{timestamp}.txt"
+    result_file = result_dir / f"test_results_xgb_w{model_config.window_size}_{timestamp}.txt"
     with open(result_file, 'w') as f:
         f.write("Test Results:\n")
         f.write(f"Model path: {model_path}\n")

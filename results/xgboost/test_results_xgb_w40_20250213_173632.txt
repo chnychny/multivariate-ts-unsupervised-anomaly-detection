@@ -1,0 +1,5 @@
+Test Results:
+Model path: models\xgboost\xgb_model_w40_20250213_100320.joblib
+Optimal Threshold: 0.444
+F1: 0.562 (TaP: 0.939, TaR: 0.401)
+Number of detected anomalies: 16

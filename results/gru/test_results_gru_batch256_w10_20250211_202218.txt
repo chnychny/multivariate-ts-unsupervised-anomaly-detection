@@ -1,8 +1,0 @@
-Test Results:
-Model path: models\gru\gru_model_batch256_w10_20250211_201820.pt
-Experiment name: batch256_w10
-Threshold: 0.068016
-F1: 0.543 (TaP: 0.629, TaR: 0.479)
-Number of detected anomalies: 19
-
-Detected anomalies: ['2', '4', '7', '10', '11', '12', '14', '16', '17', '18', '19', '21', '22', '24', '25', '26', '28', '29', '30']

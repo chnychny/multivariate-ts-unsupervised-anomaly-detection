@@ -7,7 +7,7 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 from torchinfo import summary
 from pathlib import Path
-project_root = Path(__file__).parent.parent
+project_root = Path(__file__).parent
 sys.path.append(str(project_root))
 from config.config_hai import Config, ModelConfig
 from utils.data_loader import load_dataset, HAIDataset
@@ -376,7 +376,16 @@ def test(model_path="models/gru/gru_model.pt",experiment_name='', find_threshold
     valid_columns = data['test'].columns.drop([Config.TIMESTAMP_FIELD, Config.ATTACK_FIELD] + Config.USELESS_FIELDS)
     data['train'] = data['train'][data['train']['attack']!=1] # 정상데이터만 학습에 활용
     preprocessor.fit(data['train'], valid_columns)  # train 데이터로 fit
-    test_processed = preprocessor.transform(data['test'], valid_columns)
+    
+    # train 데이터로 전처리했을 때의 특성 목록을 먼저 얻음
+    train_processed = preprocessor.transform(data['train'], valid_columns)
+    train_features = train_processed.columns.tolist()
+    
+    # test 데이터 전처리 시 train과 동일한 특성만 사용
+    
+    test_processed = preprocessor.transform(data['test'], valid_columns)  # train과 동일한 특성만 선택
+    # 'P1_PCV02D'는 train에서 값이 다 같아서 학습안됨. test에서도 빼고 평가 필요
+    test_processed = test_processed[train_features]
     n_features = test_processed.shape[-1]
     # 테스트 데이터셋 생성 (stride=1로 모든 데이터 포인트 검사)
     test_dataset = HAIDataset(
@@ -540,8 +549,8 @@ def test(model_path="models/gru/gru_model.pt",experiment_name='', find_threshold
     }
 
 if __name__ == "__main__":
-    experiment_name = "baseline_b256_w40"
-    model_path, experiment_name = main(experiment_name=experiment_name)# 인자 없이 호출하면 args에서 설정을 가져옴
-    # model_path = str(project_root) + "/models/gru/gru_model_baseline_w90_20250202_093302.pt"
-    # experiment_name = "baseline_w90"
+    # experiment_name = "baseline_b256_w10"
+    # model_path, experiment_name = main(experiment_name=experiment_name)# 인자 없이 호출하면 args에서 설정을 가져옴
+    model_path = str(project_root) + "/models/gru/gru_model_batch128_h200_w10_20250212_112246.pt"
+    experiment_name = "batch128_h200_w10_20250212_112246"
     test_results = test(model_path, experiment_name, find_threshold=True)  

@@ -16,8 +16,8 @@ def create_experiment_configs():
         {
             'model_type': 'gru',
             'config': create_model_config('gru',
-                window_size=10,
-                window_given=9,
+                window_size=30,
+                window_given=29,
                 n_hiddens=100,
                 n_layers=3,
                 batch_size=256,
@@ -25,13 +25,13 @@ def create_experiment_configs():
                 learning_rate=0.001,
                 dropout=0.2
             ),
-            'name': 'batch256_w10'
+            'name': 'batch256_w30'
         },
         {
             'model_type': 'gru',
             'config': create_model_config('gru',
-                window_size=10,
-                window_given=9,
+                window_size=30,
+                window_given=29,
                 n_hiddens=100,
                 n_layers=3,
                 batch_size=128,
@@ -39,13 +39,13 @@ def create_experiment_configs():
                 learning_rate=0.001,
                 dropout=0.2
             ),
-            'name': 'batch128_w10'
+                'name': 'batch128_w30'
         },
         {
             'model_type': 'gru',
             'config': create_model_config('gru',
-                window_size=10,
-                window_given=9,
+                window_size=30,
+                window_given=29,
                 n_hiddens=100,
                 n_layers=3,
                 batch_size=64,
@@ -53,13 +53,13 @@ def create_experiment_configs():
                 learning_rate=0.001,
                 dropout=0.2
             ),
-            'name': 'batch64_w10'
+            'name': 'batch64_w30'
         },     
         {
             'model_type': 'gru',
             'config': create_model_config('gru',
-                window_size=10,
-                window_given=9,
+                window_size=30,
+                window_given=29,
                 n_hiddens=200,
                 n_layers=3,
                 batch_size=128,
@@ -67,21 +67,21 @@ def create_experiment_configs():
                 learning_rate=0.001,
                 dropout=0.2
             ),
-            'name': 'batch128_h200_w10'
+            'name': 'batch128_h200_w30'
         },
         {
             'model_type': 'gru',
             'config': create_model_config('gru',
-                window_size=10,
-                window_given=9,
+                window_size=30,
+                window_given=29,
                 n_hiddens=200,
                 n_layers=3,
-                batch_size=128,
+                batch_size=64,
                 n_epochs=300,
                 learning_rate=0.001,
                 dropout=0.2
             ),
-            'name': 'batch64_h200_w10'
+            'name': 'batch64_h200_w30'
         }                     
     ]
     return experiment_configs

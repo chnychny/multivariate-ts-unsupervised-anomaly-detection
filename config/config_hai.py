@@ -55,8 +55,8 @@ class ModelConfig(RNNModelConfig):
 @dataclass
 class XGBoostConfig:
     # 데이터 관련 설정
-    window_size: int = 10
-    window_given: int = 9
+    window_size: int = 20
+    window_given: int = 19
     
     # XGBoost 모델 파라미터
     n_models: int = 3 # 앙상블 모델 개수

@@ -5,11 +5,15 @@ class HAIPreprocessor:
     def __init__(self):
         self.tag_min = None
         self.tag_max = None
+        self.selected_features = None  # 선택된 특성 목록 저장
         
     def fit(self, df, valid_columns):
         """학습 데이터로부터 정규화 파라미터 계산"""
-        self.tag_min = df[valid_columns].min()
-        self.tag_max = df[valid_columns].max()
+        df = df[valid_columns]
+        no_zero_columns = [col for col in df.columns if df[col].nunique() > 1]
+        self.selected_features = no_zero_columns  # 선택된 특성 저장
+        self.tag_min = df[no_zero_columns].min()
+        self.tag_max = df[no_zero_columns].max()
         
     def normalize(self, df):
         """데이터 정규화"""
@@ -28,9 +32,11 @@ class HAIPreprocessor:
         return ndf
     
     def transform(self, df, valid_columns, alpha=0.9):
-        """정규화 및 EWM 적용(알파 퍼센트 가중치. 최신 데이터에 더 큰 가중치를 줌)"""
-        # 전부 0인 column 제거
-        df = df[valid_columns]
+        """정규화 및 EWM 적용"""
+        if self.selected_features is None:
+            raise ValueError("fit()을 먼저 실행하세요")
+            
+        df = df[self.selected_features] # 
         no_zero_columns = [col for col in df.columns if df[col].nunique() > 1]
         normalized = self.normalize(df[no_zero_columns])
         return normalized.ewm(alpha=alpha).mean() 

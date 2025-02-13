@@ -418,66 +418,52 @@ def main():
             'name': 'transformer_batch128_w10',
             'model_type': 'transformer'
         },        
-        # 'lstm_batch128_w10': {
-        #     'config': create_model_config('lstm',
-        #         window_size=10,
-        #         window_given=9,
-        #         n_hiddens=50,
-        #         n_layers=3,
-        #         batch_size=128,
-        #         n_epochs=300,
-        #         learning_rate=0.001,
-        #         dropout=0.2,
-        #         bidirectional=True
-        #     ),
-        #     'name': 'lstm_batch128_w10',
-        #     'model_type': 'lstm'
-        # },
-        # 'lstm_batch64_w10': {
-        #     'config': create_model_config('lstm',
-        #         window_size=10,
-        #         window_given=9,
-        #         n_hiddens=50,
-        #         n_layers=3,
-        #         batch_size=64,
-        #         n_epochs=300,
-        #         learning_rate=0.001,
-        #         dropout=0.2,
-        #         bidirectional=True
-        #     ),
-        #     'name': 'lstm_batch64_w10',
-        #     'model_type': 'lstm'
-        # },
-        # 'transformer_batch128_layer5_w10': {
-        #     'config': create_model_config('transformer',
-        #         window_size=10,
-        #         window_given=9,
-        #         d_model=64,
-        #         nhead=8,
-        #         n_layers=5,
-        #         batch_size=128,
-        #         n_epochs=500,
-        #         learning_rate=0.0005,
-        #         dropout=0.2
-        #     ),
-        #     'name': 'transformer_batch128_layer5_w10',
-        #     'model_type': 'transformer'
-        # },    
-        # 'transformer_batch128_nhead16_w10': {
-        #     'config': create_model_config('transformer',
-        #         window_size=10,
-        #         window_given=9,
-        #         d_model=64,
-        #         nhead=16,
-        #         n_layers=3,
-        #         batch_size=128,
-        #         n_epochs=500,
-        #         learning_rate=0.0005,
-        #         dropout=0.2
-        #     ),
-        #     'name': 'transformer_batch128_nhead16_w10',
-        #     'model_type': 'transformer'
-        # },                          
+      
+        'lstm_batch64_w10': {
+             'config': create_model_config('lstm',
+                 window_size=10,
+                 window_given=9,
+                 n_hiddens=50,
+                 n_layers=3,
+                 batch_size=64,
+                 n_epochs=300,
+                 learning_rate=0.001,
+                 dropout=0.2,
+                 bidirectional=True
+             ),
+             'name': 'lstm_batch64_w10',
+             'model_type': 'lstm'
+         },
+         'transformer_batch128_layer5_w10': {
+             'config': create_model_config('transformer',
+                 window_size=10,
+                 window_given=9,
+                 d_model=64,
+                 nhead=8,
+                 n_layers=5,
+                 batch_size=128,
+                 n_epochs=500,
+                 learning_rate=0.0005,
+                 dropout=0.2
+             ),
+             'name': 'transformer_batch128_layer5_w10',
+             'model_type': 'transformer'
+         },    
+         'transformer_batch128_nhead16_w10': {
+             'config': create_model_config('transformer',
+                 window_size=10,
+                 window_given=9,
+                 d_model=64,
+                 nhead=16,
+                 n_layers=3,
+                 batch_size=128,
+                 n_epochs=500,
+                 learning_rate=0.0005,
+                 dropout=0.2
+             ),
+             'name': 'transformer_batch128_nhead16_w10',
+             'model_type': 'transformer'
+         },                          
     }
     results = []
     for exp_key, exp_config in experiment_configs.items():

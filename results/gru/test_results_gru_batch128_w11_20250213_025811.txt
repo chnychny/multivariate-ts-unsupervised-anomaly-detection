@@ -1,0 +1,8 @@
+Test Results:
+Model path: models\gru\gru_model_batch128_w11_20250213_025345.pt
+Experiment name: batch128_w11
+Threshold: 0.047606
+F1: 0.548 (TaP: 0.597, TaR: 0.506)
+Number of detected anomalies: 19
+
+Detected anomalies: ['1', '2', '3', '4', '7', '13', '14', '16', '17', '18', '19', '21', '22', '24', '25', '27', '28', '29', '30']

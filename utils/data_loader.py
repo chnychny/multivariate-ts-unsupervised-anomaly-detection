@@ -39,7 +39,11 @@ def load_dataset(data_dir, version="HAI 1.0/"):
     # 데이터 추출 - train1 (9/15) train2 (11/1~4)
     train_data_out,extracted_periods_train = extract_attack_periods(train_data, attack_times)
     test_data_out,extracted_periods_test = extract_attack_periods(test_data, attack_times)
-
+    # 칼럼 추출
+    col_p1 = [x for x in train_data_out.columns if x.startswith('P1')]
+    col_revised = col_p1 + ['time', 'attack', 'attack_P1','attack_P2','attack_P3']
+    train_data_out = train_data_out[col_revised]
+    test_data_out = test_data_out[col_revised]
     return {
         'train': train_data_out,
         'test': test_data_out
